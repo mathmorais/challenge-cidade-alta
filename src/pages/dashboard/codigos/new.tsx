@@ -2,11 +2,11 @@ import { DashboardLayout } from "components/layouts/DashboardLayout/DashboardLay
 import { LayoutNextPage } from "next";
 
 const NewRegisterPage: LayoutNextPage = () => {
-  return <div></div>;
+	return <div></div>;
 };
 
 NewRegisterPage.getLayout = (page) => {
-  return <DashboardLayout>{page}</DashboardLayout>;
+	return <DashboardLayout contentTitle="Novo registro">{page}</DashboardLayout>;
 };
 
 export default NewRegisterPage;

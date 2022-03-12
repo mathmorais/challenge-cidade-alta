@@ -1,22 +1,22 @@
 import type { AppProps } from "next/app";
 import { LayoutNextPage } from "next";
-import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "styles/Global";
 import { theme } from "utils/constants/theme/theme";
+import { Global, ThemeProvider } from "@emotion/react";
 
 type AppPropsWithLayout = AppProps & {
-  Component: LayoutNextPage;
+	Component: LayoutNextPage;
 };
 
 const App = ({ Component, pageProps }: AppPropsWithLayout) => {
-  const getLayout = Component.getLayout ?? ((page) => page);
+	const getLayout = Component.getLayout ?? ((page) => page);
 
-  return getLayout(
-    <ThemeProvider theme={theme({ mode: "light" })}>
-      <GlobalStyle />
-      <Component {...pageProps} />
-    </ThemeProvider>
-  );
+	return (
+		<ThemeProvider theme={theme("light")}>
+			<Global styles={GlobalStyle} />
+			{getLayout(<Component {...pageProps} />)}
+		</ThemeProvider>
+	);
 };
 
 export default App;

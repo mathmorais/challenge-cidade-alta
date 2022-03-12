@@ -1,12 +1,15 @@
 import { DashboardLayout } from "components/layouts/DashboardLayout/DashboardLayout";
+import { PenalCodesList } from "components/layouts/PenalCodesList/PenalCodesList";
 import { LayoutNextPage } from "next";
 
-const RegistersPage: LayoutNextPage = () => {
-  return <div></div>;
+const PenalCodesPage: LayoutNextPage = () => {
+	return <PenalCodesList />;
 };
 
-RegistersPage.getLayout = (page) => {
-  return <DashboardLayout>{page}</DashboardLayout>;
+PenalCodesPage.getLayout = (page) => {
+	return (
+		<DashboardLayout contentTitle="Códigos Penais">{page}</DashboardLayout>
+	);
 };
 
-export default RegistersPage;
+export default PenalCodesPage;
