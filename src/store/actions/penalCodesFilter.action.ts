@@ -10,3 +10,7 @@ export const setPenalCodesFilter = (
 	type: PenalCodesFilterActions.set,
 	payload: payload,
 });
+
+export const clearPenalCodesFilter = () => ({
+	type: PenalCodesFilterActions.clear,
+});

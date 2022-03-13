@@ -29,13 +29,17 @@ export default PenalCodesPage;
 export const getServerSideProps: GetServerSideProps<
 	ServerSideDTO
 > = async () => {
-	const response = await axios.get<IPenalCode[]>(
-		"https://my-json-server.typicode.com/cidadealta/exercise/codigopenal"
-	);
+	const url = process.env.API_URL;
+	let data: IPenalCode[] = [];
+
+	if (url) {
+		const response = await axios.get<IPenalCode[]>(url);
+		data = response.data;
+	}
 
 	return {
 		props: {
-			penalCodes: response.data,
+			penalCodes: data,
 		},
 	};
 };
