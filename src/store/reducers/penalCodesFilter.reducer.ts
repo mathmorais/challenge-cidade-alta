@@ -1,8 +1,8 @@
-import { PenalCodesFilters } from "enums/PenalCodesFilters";
+import { PenalCodesTableFilters } from "enums/PenalCodesTableFilters";
 import { IReducer } from "store/interfaces/IReducer";
 
 export type PenalCodesFilterValue = {
-	filter?: PenalCodesFilters;
+	filter?: PenalCodesTableFilters;
 	value?: string | number;
 };
 
@@ -15,10 +15,14 @@ export const penalCodesFilterReducer: IReducer<
 	typeof INITIAL_STATE,
 	PenalCodesFilterActions
 > = (state = INITIAL_STATE, action) => {
-	switch (action?.type) {
-		case PenalCodesFilterActions.set:
-			return { filter: action.payload.filter, value: action.payload.value };
-		default:
-			return state;
+	if (state?.value !== action?.payload?.value) {
+		switch (action?.type) {
+			case PenalCodesFilterActions.set:
+				return { filter: action.payload.filter, value: action.payload.value };
+			default:
+				return state;
+		}
+	} else {
+		return state;
 	}
 };

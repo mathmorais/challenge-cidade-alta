@@ -6,6 +6,8 @@ import { Status } from "../Status/Status";
 import { Dropdown } from "components/buttons/Dropdown/Dropdown";
 import { usePenalCodesList } from "hooks/usePenalCodesList";
 import { useSelector } from "react-redux";
+import { IPenalCode } from "interfaces/IPenalCode";
+import { PenalCodesTableFilters } from "enums/PenalCodesTableFilters";
 
 export const PenalCodesList = () => {
 	const { columns, dropdownItems } = usePenalCodesList();
@@ -14,28 +16,38 @@ export const PenalCodesList = () => {
 		(store) => store.penalCodesFilterReducer
 	);
 
-	useEffect(() => {
-		console.log(penalCodesFilter);
-	}, [penalCodesFilter]);
+	const handleFilters = (data: IPenalCode[]) => {
+		switch (penalCodesFilter.filter) {
+			case PenalCodesTableFilters.search:
+				return data.filter((item) => {
+					const searchFor = String(penalCodesFilter.value);
+					const regex = new RegExp(searchFor, "i");
+
+					return regex.test(item.nome);
+				});
+			default:
+				return data;
+		}
+	};
+
+	const filteredPenalCodes = handleFilters(penalCodes);
 
 	return (
-		<Card>
-			<Table columns={columns}>
-				{penalCodes.map((row) => (
-					<TableRow key={row.id}>
-						<TableCell bold>{row.nome}</TableCell>
-						<TableCell>{dateFormatter(row.dataCriacao)}</TableCell>
-						<TableCell>R${Math.floor(row.multa)}</TableCell>
-						<TableCell>{row.tempoPrisao} meses</TableCell>
-						<TableCell>
-							<Status status={row.status} />
-						</TableCell>
-						<TableCell>
-							<Dropdown items={dropdownItems} />
-						</TableCell>
-					</TableRow>
-				))}
-			</Table>
-		</Card>
+		<Table columns={columns}>
+			{filteredPenalCodes.map((penalCode) => (
+				<TableRow key={penalCode.id}>
+					<TableCell bold>{penalCode.nome}</TableCell>
+					<TableCell>{dateFormatter(penalCode.dataCriacao)}</TableCell>
+					<TableCell>R${Math.floor(penalCode.multa)}</TableCell>
+					<TableCell>{penalCode.tempoPrisao} meses</TableCell>
+					<TableCell>
+						<Status status={penalCode.status} />
+					</TableCell>
+					<TableCell>
+						<Dropdown items={dropdownItems} />
+					</TableCell>
+				</TableRow>
+			))}
+		</Table>
 	);
 };

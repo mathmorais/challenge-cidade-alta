@@ -4,12 +4,11 @@ import { typography } from "utils/constants/typography";
 
 const Container = styled.table`
 	width: 100%;
-	border-collapse: collapse;
 	border-spacing: 0;
 `;
 
 const TableHead = styled.thead`
-	border: 2px solid ${(props) => props.theme.neutral[100]};
+	width: 100%;
 `;
 const TableBody = styled.tbody``;
 
@@ -60,6 +59,7 @@ export const Table: React.FC<{
 					))}
 				</TableRow>
 			</TableHead>
+
 			<TableBody>{children}</TableBody>
 		</Container>
 	);
