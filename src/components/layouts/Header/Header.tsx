@@ -5,6 +5,8 @@ type ContainerStyles = {
 };
 
 const Container = styled.div<ContainerStyles>`
+	position: sticky;
+	top: 0;
 	display: flex;
 	width: 100%;
 	padding: 20px 50px;

@@ -1,16 +1,19 @@
 import styled from "@emotion/styled";
-import { Button } from "components/buttons/Button/Button";
+import { Button, ButtonDefault } from "components/buttons/Button/Button";
+
 import { Form } from "components/forms/Form/Form";
 import { Input } from "components/forms/Input/Input";
+import { useRouter } from "next/router";
 import { ChevronRightIcon } from "utils/constants/icons";
 import { Card } from "../Card/Card";
 
 const Wrapper = styled.section`
 	width: 100%;
+	height: 200px;
 	max-width: 440px;
 	flex-shrink: 2;
 
-	button:first-of-type {
+	& > button {
 		margin-bottom: 25px;
 	}
 `;
@@ -24,20 +27,29 @@ const InputWrapper = styled.div`
 	gap: 10px;
 	align-items: center;
 	justify-content: center;
+
+	button {
+		width: 100px;
+		height: 40px;
+	}
 `;
 
 export const PenalCodesFilters = () => {
+	const { push } = useRouter();
+
 	return (
 		<Wrapper>
-			<Button variation="filled">Novo Registro</Button>
+			<Button onClick={() => push("/dashboard/codigos/new")} variation="filled">
+				Novo Registro
+			</Button>
 			<Container>
 				<Card>
 					<Form>
 						<Input type="date" label="Data" />
 						<InputWrapper>
-							<Input label="Minimo" />
-							<Input label="Maximo" />
-							<Button>
+							<Input placeholder="R$ Minimo" label="Minimo" />
+							<Input placeholder="R$ Maximo" label="Maximo" />
+							<Button rounded variation="filled">
 								<ChevronRightIcon />
 							</Button>
 						</InputWrapper>

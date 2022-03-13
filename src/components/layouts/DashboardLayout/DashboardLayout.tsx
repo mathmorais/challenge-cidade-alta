@@ -1,5 +1,8 @@
 import styled from "@emotion/styled";
+import { ButtonFilled } from "components/buttons/Button/variations/Button.filled";
 import { IUser } from "interfaces/IUser";
+import { useRouter } from "next/router";
+import { ChevronLeftIcon } from "utils/constants/icons";
 import { Header } from "../Header/Header";
 import { Profile } from "../Profile/Profile";
 import { Sidebar } from "../Sidebar/Sidebar";
@@ -11,17 +14,26 @@ const Container = styled.div`
 	width: 100%;
 	${(props) => props.theme.neutral.black}
 	background: ${(props) => props.theme.background};
+	overflow: hidden;
 `;
 
 const Main = styled.div`
 	width: 100%;
 	display: flex;
 	flex-direction: column;
+	overflow: auto;
 `;
 
 const ContentTitleWrapper = styled.div`
 	display: flex;
+	align-items: center;
 	margin-bottom: 25px;
+
+	button {
+		margin-right: 8px;
+		width: 36px;
+		height: 36px;
+	}
 `;
 
 const Content = styled.div`
@@ -38,10 +50,17 @@ const Frame = styled.div`
 	flex-direction: column;
 `;
 
-export const DashboardLayout: React.FC<{ contentTitle?: string }> = ({
+type DashboardLayoutProps = {
+	contentTitle?: string;
+	redirectTo?: string;
+};
+
+export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 	children,
 	contentTitle,
+	redirectTo,
 }) => {
+	const { push } = useRouter();
 	const mockedUser: IUser = {
 		fullName: "John Scott",
 		user: "johnScott",
@@ -57,6 +76,11 @@ export const DashboardLayout: React.FC<{ contentTitle?: string }> = ({
 				</Header>
 				<Content>
 					<ContentTitleWrapper>
+						{redirectTo && (
+							<ButtonFilled onClick={() => push(redirectTo)} rounded>
+								<ChevronLeftIcon />
+							</ButtonFilled>
+						)}
 						<Title>{contentTitle}</Title>
 					</ContentTitleWrapper>
 					<Frame>{children}</Frame>

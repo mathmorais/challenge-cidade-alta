@@ -4,10 +4,6 @@ import { typography } from "../../../utils/constants/typography";
 import { Span } from "../../layouts/Typography/Typography";
 import { css } from "@emotion/react";
 
-type InputStyleProps = {
-	readOnly?: boolean;
-};
-
 export const Wrapper = styled.div`
 	display: flex;
 	width: 100%;
@@ -19,7 +15,11 @@ const DisabledInput = css`
 	pointer-events: none;
 `;
 
-const Field = styled.input<InputStyleProps>`
+type InputStyleProps = {
+	readOnly?: boolean;
+};
+
+export const Field = styled.input<InputStyleProps>`
 	display: flex;
 	align-items: center;
 	position: absolute;
@@ -43,7 +43,7 @@ const Field = styled.input<InputStyleProps>`
 	}
 
 	::placeholder {
-		color: ${(props) => props.theme.neutral[100]};
+		color: ${(props) => props.theme.neutral[200]};
 		opacity: 1;
 	}
 `;

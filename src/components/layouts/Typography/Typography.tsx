@@ -15,6 +15,7 @@ export const Span = styled.span`
 export const Paragraphy = styled.p`
 	font-size: ${typography.paragraphy.size};
 	font-weight: ${typography.paragraphy.weight};
+	line-height: ${typography.paragraphy.lineHeight};
 `;
 
 export const Subtitle = styled.p`

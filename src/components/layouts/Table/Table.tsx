@@ -3,14 +3,13 @@ import styled from "@emotion/styled";
 import { typography } from "utils/constants/typography";
 
 const Container = styled.table`
+	width: 100%;
 	border-collapse: collapse;
 	border-spacing: 0;
 `;
 
 const TableHead = styled.thead`
-	tr th {
-		font-weight: bold;
-	}
+	border: 2px solid ${(props) => props.theme.neutral[100]};
 `;
 const TableBody = styled.tbody``;
 
@@ -20,7 +19,7 @@ const TableData = css`
 	line-height: ${typography.span.lineHeight};
 `;
 
-const Row = styled.tr``;
+export const TableRow = styled.tr``;
 
 type CellAlign =
 	| "start"
@@ -33,12 +32,13 @@ type CellAlign =
 
 type CellStylesProps = {
 	align?: CellAlign;
+	bold?: boolean;
 };
 
-const Cell = styled.td<CellStylesProps>`
+export const TableCell = styled.td<CellStylesProps>`
 	${TableData}
-	line-height: calc(${typography.span.lineHeight} + 1);
-	text-align: ${(props) => props.align};
+	text-align: ${(props) => props.align ?? "left"};
+	font-weight: ${(props) => props.bold && "bold"};
 `;
 
 interface ITableColumn extends CellStylesProps {
@@ -46,30 +46,21 @@ interface ITableColumn extends CellStylesProps {
 	headerName: string;
 }
 
-interface ITableRow extends Record<string, any>, CellStylesProps {
-	id?: string | number;
-}
-
 export const Table: React.FC<{
 	columns: ITableColumn[];
-	rows: ITableRow[];
-}> = ({ columns, rows }) => {
+}> = ({ columns, children }) => {
 	return (
 		<Container>
 			<TableHead>
-				<Row>
+				<TableRow>
 					{columns.map((column, index) => (
-						<Cell key={index} as="th">
+						<TableCell key={index} as="th">
 							{column.headerName}
-						</Cell>
+						</TableCell>
 					))}
-				</Row>
+				</TableRow>
 			</TableHead>
-			<TableBody>
-				<Row>
-					<Cell>RowData</Cell>
-				</Row>
-			</TableBody>
+			<TableBody>{children}</TableBody>
 		</Container>
 	);
 };

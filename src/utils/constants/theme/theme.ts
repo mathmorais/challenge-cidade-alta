@@ -4,6 +4,10 @@ import { ThemeLight } from "./theme.light";
 type ThemeModes = "light" | "dark";
 
 export interface ITheme {
+	feedBackColors: {
+		success: string;
+	};
+
 	primary: {
 		default: string;
 		disabled: string;
@@ -17,6 +21,7 @@ export interface ITheme {
 		300: string;
 	};
 
+	transparentBackground: string;
 	background: string;
 }
 

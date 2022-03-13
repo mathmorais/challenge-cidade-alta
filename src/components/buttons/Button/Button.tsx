@@ -2,24 +2,18 @@ import styled from "@emotion/styled";
 import React, { ButtonHTMLAttributes, ReactNode } from "react";
 import { Paragraphy } from "components/layouts/Typography/Typography";
 import { ButtonHelper } from "./Button.helper";
-
 import { ButtonFilled } from "./variations/Button.filled";
 import { ButtonTransparent } from "./variations/Button.transparent";
 
-type Types = "circle" | "rounded";
-
 type Variations = "default" | "filled" | "transparent";
 
-type ButtonDefaultProps = {
+export type ButtonProps = {
 	withIcon?: ReactNode;
 	variation?: Variations;
-	type?: Types;
+	rounded?: boolean;
 } & ButtonAttributes;
 
 export const ButtonDefault = styled(ButtonHelper)`
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	width: 100%;
 	padding: 10px;
 	border-radius: 8px;
@@ -33,7 +27,7 @@ export const ButtonDefault = styled(ButtonHelper)`
 
 export type ButtonAttributes = ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button: React.FC<ButtonDefaultProps> = ({
+export const Button: React.FC<ButtonProps> = ({
 	children,
 	withIcon,
 	variation,
@@ -51,7 +45,7 @@ export const Button: React.FC<ButtonDefaultProps> = ({
 
 	return (
 		<ButtonComponent {...props}>
-			<Paragraphy>{children}</Paragraphy>
+			{children}
 			{Icon && Icon}
 		</ButtonComponent>
 	);

@@ -1,60 +1,41 @@
+import { useEffect } from "react";
 import { Card } from "../Card/Card";
-import { PenalCodesFilters } from "../PenalCodesFilters/PenalCodesFilters";
-import styled from "@emotion/styled";
-import { Table } from "../Table/Table";
-
-export interface IPenalCode {
-	nome: string;
-	descricao: string;
-	dataCriacao: string;
-	multa: number;
-	tempoPrisao: number;
-	status: number;
-}
-
-const Wrapper = styled.div`
-	display: flex;
-	flex-direction: row;
-	gap: 10px;
-`;
-
-const Container = styled.div`
-	width: 100%;
-	max-width: 960px;
-`;
-
-const columns = [
-	{ field: "nome", headerName: "Nome", width: 70 },
-	{ field: "descricao", headerName: "Descrição", width: 130 },
-	{ field: "dataCriacao", headerName: "Data", width: 130 },
-	{ field: "dataCriacao", headerName: "Data", width: 130 },
-	{ field: "multa", headerName: "Multa", width: 130 },
-	{ field: "tempoPrisao", headerName: "Tempo de prisão", width: 130 },
-	{ field: "status", headerName: "Status", width: 130 },
-];
-
-const rows = [
-	{
-		id: 1,
-		nome: "Desacato",
-		descricao:
-			"Desacato, desobediência ou desrespeito perante um tribunal ou oficiais da policia na forma de comportamento que se opõe ou desafia a autoridade, a justiça e a dignidade do tribunal. Um réu só pode ser cobrado uma vez por desacato",
-		dataCriacao: "2021-04-29T01:26:35.700Z",
-		multa: 501.2,
-		tempoPrisao: 30,
-		status: 1,
-	},
-];
+import { Table, TableCell, TableRow } from "../Table/Table";
+import { dateFormatter } from "utils/helpers/dateFormatter";
+import { Status } from "../Status/Status";
+import { Dropdown } from "components/buttons/Dropdown/Dropdown";
+import { usePenalCodesList } from "hooks/usePenalCodesList";
+import { useSelector } from "react-redux";
 
 export const PenalCodesList = () => {
+	const { columns, dropdownItems } = usePenalCodesList();
+	const penalCodes = useSelector((store) => store.penalCodesReducer);
+	const penalCodesFilter = useSelector(
+		(store) => store.penalCodesFilterReducer
+	);
+
+	useEffect(() => {
+		console.log(penalCodesFilter);
+	}, [penalCodesFilter]);
+
 	return (
-		<Wrapper>
-			<PenalCodesFilters />
-			<Container>s
-				<Card>
-					<Table />
-				</Card>
-			</Container>
-		</Wrapper>
+		<Card>
+			<Table columns={columns}>
+				{penalCodes.map((row) => (
+					<TableRow key={row.id}>
+						<TableCell bold>{row.nome}</TableCell>
+						<TableCell>{dateFormatter(row.dataCriacao)}</TableCell>
+						<TableCell>R${Math.floor(row.multa)}</TableCell>
+						<TableCell>{row.tempoPrisao} meses</TableCell>
+						<TableCell>
+							<Status status={row.status} />
+						</TableCell>
+						<TableCell>
+							<Dropdown items={dropdownItems} />
+						</TableCell>
+					</TableRow>
+				))}
+			</Table>
+		</Card>
 	);
 };

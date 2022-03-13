@@ -23,7 +23,7 @@ const LoginPage: LayoutNextPage = () => {
 			<Form onSubmit={() => router.push("/dashboard/codigos")}>
 				<Input label="Usuário" />
 				<Input type="password" label="Senha" />
-				<Button>Submit</Button>
+				<Button>Fazer Login</Button>
 			</Form>
 		</Card>
 	);

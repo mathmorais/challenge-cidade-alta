@@ -14,7 +14,7 @@ export const typography = new (class Typography {
 	}
 
 	get paragraphy(): ITypography {
-		return { size: "1.6rem", weight: 500 };
+		return { size: "1.6rem", weight: 500, lineHeight: "24px" };
 	}
 
 	get subTitle(): ITypography {

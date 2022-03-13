@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { GavelIcon, LogoutIcon, PoliceIcon } from "utils/constants/icons";
+import { shadows } from "utils/constants/shadows";
 
 const Container = styled.aside`
 	display: flex;
@@ -12,6 +13,7 @@ const Container = styled.aside`
 	height: 100%;
 	background: ${(props) => props.theme.neutral.white};
 	padding: 25px 0;
+	box-shadow: ${shadows.level1};
 `;
 
 const IconHelper = styled.div`
@@ -64,7 +66,7 @@ const Item = styled.button<{ selected: boolean }>`
 		props.selected &&
 		css`
 			svg {
-				fill: ${props.theme.neutral.white};
+				fill: ${props.theme.primary.default};
 			}
 		`};
 `;
@@ -93,10 +95,6 @@ export const Sidebar: React.FC = () => {
 		));
 	};
 
-	const handleLogout = () => {
-		push("/");
-	};
-
 	return (
 		<Container>
 			<Logo>
@@ -105,7 +103,7 @@ export const Sidebar: React.FC = () => {
 				</IconHelper>
 			</Logo>
 			{handleSerializeItems()}
-			<Logout onClick={handleLogout}>
+			<Logout onClick={() => push("/")}>
 				<IconHelper>
 					<LogoutIcon />
 				</IconHelper>
