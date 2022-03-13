@@ -1,12 +1,20 @@
 import { DashboardLayout } from "components/layouts/DashboardLayout/DashboardLayout";
+import { VisualizePenalCodeTemplate } from "components/templates/VisualizePenalCodeTemplate/VisualizePenalCodeTemplate";
 import { LayoutNextPage } from "next";
 
-const RegisterPage: LayoutNextPage = () => {
-  return <div></div>;
+const VisualizeRegisterPage: LayoutNextPage = () => {
+	return <VisualizePenalCodeTemplate />;
 };
 
-RegisterPage.getLayout = (page) => {
-  return <DashboardLayout>{page}</DashboardLayout>;
+VisualizeRegisterPage.getLayout = (page) => {
+	return (
+		<DashboardLayout
+			redirectTo="/dashboard/codigos"
+			contentTitle="Visualizar Código"
+		>
+			{page}
+		</DashboardLayout>
+	);
 };
 
-export default RegisterPage;
+export default VisualizeRegisterPage;

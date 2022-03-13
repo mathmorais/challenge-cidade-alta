@@ -1,12 +1,41 @@
+import axios from "axios";
 import { DashboardLayout } from "components/layouts/DashboardLayout/DashboardLayout";
-import { LayoutNextPage } from "next";
+import { PenalCodesTemplate } from "components/templates/PenalCodesTemplate/PenalCodesTemplate";
+import { IPenalCode } from "interfaces/IPenalCode";
+import { GetServerSideProps, LayoutNextPage } from "next";
+import { useDispatch } from "react-redux";
+import { setPenalCodesAction } from "store/actions/penalCodes.action";
 
-const RegistersPage: LayoutNextPage = () => {
-  return <div></div>;
+type ServerSideDTO = {
+	penalCodes: IPenalCode[];
 };
 
-RegistersPage.getLayout = (page) => {
-  return <DashboardLayout>{page}</DashboardLayout>;
+const PenalCodesPage: LayoutNextPage<ServerSideDTO> = ({ penalCodes }) => {
+	const dispatch = useDispatch();
+
+	dispatch(setPenalCodesAction(penalCodes));
+
+	return <PenalCodesTemplate />;
 };
 
-export default RegistersPage;
+PenalCodesPage.getLayout = (page) => {
+	return (
+		<DashboardLayout contentTitle="Códigos Penais">{page}</DashboardLayout>
+	);
+};
+
+export default PenalCodesPage;
+
+export const getServerSideProps: GetServerSideProps<
+	ServerSideDTO
+> = async () => {
+	const response = await axios.get<IPenalCode[]>(
+		"https://my-json-server.typicode.com/cidadealta/exercise/codigopenal"
+	);
+
+	return {
+		props: {
+			penalCodes: response.data,
+		},
+	};
+};
