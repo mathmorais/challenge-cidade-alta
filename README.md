@@ -17,19 +17,19 @@ Instale as dependencias com o seu gerenciador de pacotes
 Como **npm**
 
 ```bash
-  npm install
+ npm install
 ```
 
 Ou **yarn**
 
 ```bash
-	yarn install
+ yarn install
 ```
 
 E inicialize o projeto em ambiente de desenvolvimento atravéz do comando:
 
 ```bash
-  yarn dev
+ yarn dev
 ```
 
 ### 💻 Principais techs
