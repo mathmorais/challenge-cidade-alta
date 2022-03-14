@@ -26,7 +26,7 @@ Ou **yarn**
 	yarn install
 ```
 
-E inicialize o projeto em ambiente de desenvolvimento atravéz do comando:
+Após declarar as variaveis ambientes em um arquivo .env, inicialize o projeto em ambiente de desenvolvimento atravéz do comando:
 
 ```bash
   yarn dev
