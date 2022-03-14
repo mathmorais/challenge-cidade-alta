@@ -12,8 +12,6 @@ const Container = styled.div`
 	display: flex;
 	height: 100vh;
 	width: 100%;
-	${(props) => props.theme.neutral.black}
-	background: ${(props) => props.theme.background};
 	overflow: hidden;
 `;
 
@@ -22,6 +20,7 @@ const Main = styled.div`
 	display: flex;
 	flex-direction: column;
 	overflow: auto;
+	background: ${(props) => props.theme.background};
 `;
 
 const ContentTitleWrapper = styled.div`
