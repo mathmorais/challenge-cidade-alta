@@ -1,16 +1,17 @@
-import { useEffect } from "react";
-import { Card } from "../Card/Card";
 import { Table, TableCell, TableRow } from "../Table/Table";
 import { dateFormatter } from "utils/helpers/dateFormatter";
 import { Status } from "../Status/Status";
 import { Dropdown } from "components/buttons/Dropdown/Dropdown";
 import { usePenalCodesList } from "hooks/usePenalCodesList";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IPenalCode } from "interfaces/IPenalCode";
 import { PenalCodesTableFilters } from "enums/PenalCodesTableFilters";
+import { useEffect } from "react";
+import { clearPenalCodesFilter } from "store/actions/penalCodesFilter.action";
 
 export const PenalCodesList = () => {
 	const { columns, dropdownItems } = usePenalCodesList();
+	const dispatch = useDispatch();
 	const penalCodes = useSelector((store) => store.penalCodesReducer);
 	const penalCodesFilter = useSelector(
 		(store) => store.penalCodesFilterReducer
@@ -31,6 +32,10 @@ export const PenalCodesList = () => {
 	};
 
 	const filteredPenalCodes = handleFilters(penalCodes);
+
+	useEffect(() => {
+		dispatch(clearPenalCodesFilter());
+	}, []);
 
 	return (
 		<Table columns={columns}>

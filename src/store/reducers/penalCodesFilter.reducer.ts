@@ -7,7 +7,8 @@ export type PenalCodesFilterValue = {
 };
 
 export enum PenalCodesFilterActions {
-	set = "SET_PENAL_CODES_FILTER",
+	set = "SET_PENALCODES_FILTER",
+	clear = "CLEAR_PENALCODES_FILTER",
 }
 const INITIAL_STATE: PenalCodesFilterValue = {};
 
@@ -19,6 +20,8 @@ export const penalCodesFilterReducer: IReducer<
 		switch (action?.type) {
 			case PenalCodesFilterActions.set:
 				return { filter: action.payload.filter, value: action.payload.value };
+			case PenalCodesFilterActions.clear:
+				return {};
 			default:
 				return state;
 		}
