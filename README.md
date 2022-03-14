@@ -4,7 +4,7 @@
 
 Projeto consiste em um simples dashboard para controlar os códigos penais de dentro da cidade.
 
-### Demo
+### 💻 Demo
 
 <img src=".github/assets/dashboard.png" alt="Logo do projeto" />
 
@@ -32,7 +32,7 @@ E inicialize o projeto em ambiente de desenvolvimento atravéz do comando:
  yarn dev
 ```
 
-### 💻 Principais techs
+### 🧑‍🔬 Principais techs
 
 - Nextjs
 - Redux
