@@ -7,11 +7,17 @@ import { Anchor } from "components/buttons/Anchor/Anchor";
 import { Button } from "components/buttons/Button/Button";
 import { Form } from "components/forms/Form/Form";
 import { createRef } from "react";
+import { useRouter } from "next/router";
 
 const RegisterPage: LayoutNextPage = () => {
 	const userRef = createRef<HTMLInputElement>();
 	const passwordRef = createRef<HTMLInputElement>();
 	const confirmPasswordRef = createRef<HTMLInputElement>();
+	const router = useRouter();
+
+	const handleOnSubmit = () => {
+		router.push("/");
+	};
 
 	return (
 		<Card
@@ -22,7 +28,7 @@ const RegisterPage: LayoutNextPage = () => {
 				</Paragraphy>
 			}
 		>
-			<Form>
+			<Form onSubmit={handleOnSubmit}>
 				<Input ref={userRef} label="Usuário" />
 				<Input type="password" ref={passwordRef} label="Senha" />
 				<Input

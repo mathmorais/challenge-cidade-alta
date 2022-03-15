@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mediaQueries } from "utils/constants/mediaQueries";
 
 type ContainerStyles = {
 	withBackground?: boolean;
@@ -15,6 +16,10 @@ const Container = styled.div<ContainerStyles>`
 
 	svg {
 		fill: ${(props) => props.theme.neutral.white};
+	}
+
+	${mediaQueries.breakpoint[0]} {
+		padding: 20px 15px;
 	}
 `;
 

@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { Input } from "components/forms/Input/Input";
 import { IPenalCode } from "interfaces/IPenalCode";
+import { mediaQueries } from "utils/constants/mediaQueries";
 import { dateFormatter } from "utils/helpers/dateFormatter";
 import { Card } from "../Card/Card";
 import { Status } from "../Status/Status";
@@ -16,6 +17,11 @@ const InfoRow = styled.div`
 	width: 100%;
 	display: inline-flex;
 	gap: 50px;
+
+	${mediaQueries.breakpoint[0]} {
+		flex-direction: column;
+		gap: 20px;
+	}
 `;
 
 const InfoCard = styled.div`

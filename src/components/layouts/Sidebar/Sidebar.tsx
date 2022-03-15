@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { GavelIcon, LogoutIcon, PoliceIcon } from "utils/constants/icons";
 import { shadows } from "utils/constants/shadows";
+import { mediaQueries } from "utils/constants/mediaQueries";
 
 const Container = styled.aside`
 	display: flex;
@@ -14,6 +15,10 @@ const Container = styled.aside`
 	background: ${(props) => props.theme.neutral.white};
 	padding: 25px 0;
 	box-shadow: ${shadows.level1};
+
+	${mediaQueries.breakpoint[0]} {
+		display: none;
+	}
 `;
 
 const IconHelper = styled.div`

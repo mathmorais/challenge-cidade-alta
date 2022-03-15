@@ -9,11 +9,16 @@ import { PenalCodesTableFilters } from "enums/PenalCodesTableFilters";
 import { createRef, useRef } from "react";
 import { useDispatch } from "react-redux";
 import { setPenalCodesFilter } from "store/actions/penalCodesFilter.action";
+import { mediaQueries } from "utils/constants/mediaQueries";
 
 const Wrapper = styled.div`
 	display: flex;
 	flex-direction: row;
 	gap: 10px;
+
+	${mediaQueries.breakpoint[0]} {
+		flex-direction: column;
+	}
 `;
 
 const Container = styled.div`
