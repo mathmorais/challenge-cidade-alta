@@ -5,16 +5,22 @@ import { Form } from "components/forms/Form/Form";
 import { Input } from "components/forms/Input/Input";
 import { useRouter } from "next/router";
 import { ChevronRightIcon } from "utils/constants/icons";
+import { mediaQueries } from "utils/constants/mediaQueries";
 import { Card } from "../Card/Card";
 
 const Wrapper = styled.section`
 	width: 100%;
-	height: 200px;
 	max-width: 440px;
 	flex-shrink: 2;
+	height: 200px;
 
 	& > button {
 		margin-bottom: 25px;
+	}
+
+	${mediaQueries.breakpoint[0]} {
+		max-width: none;
+		height: initial;
 	}
 `;
 

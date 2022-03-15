@@ -38,6 +38,7 @@ export const TableCell = styled.td<CellStylesProps>`
 	${TableData}
 	text-align: ${(props) => props.align ?? "left"};
 	font-weight: ${(props) => props.bold && "bold"};
+	white-space: pre-line;
 `;
 
 interface ITableColumn extends CellStylesProps {

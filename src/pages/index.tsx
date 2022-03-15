@@ -11,6 +11,10 @@ import { useRouter } from "next/router";
 const LoginPage: LayoutNextPage = () => {
 	const router = useRouter();
 
+	const handleOnSubmit = () => {
+		router.push("/dashboard/codigos");
+	};
+
 	return (
 		<Card
 			title="Login"
@@ -20,7 +24,7 @@ const LoginPage: LayoutNextPage = () => {
 				</Paragraphy>
 			}
 		>
-			<Form onSubmit={() => router.push("/dashboard/codigos")}>
+			<Form onSubmit={handleOnSubmit}>
 				<Input label="Usuário" />
 				<Input type="password" label="Senha" />
 				<Button>Fazer Login</Button>

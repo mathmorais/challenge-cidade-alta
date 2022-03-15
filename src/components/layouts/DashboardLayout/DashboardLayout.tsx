@@ -3,6 +3,7 @@ import { ButtonFilled } from "components/buttons/Button/variations/Button.filled
 import { IUser } from "interfaces/IUser";
 import { useRouter } from "next/router";
 import { ChevronLeftIcon } from "utils/constants/icons";
+import { mediaQueries } from "utils/constants/mediaQueries";
 import { Header } from "../Header/Header";
 import { Profile } from "../Profile/Profile";
 import { Sidebar } from "../Sidebar/Sidebar";

@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { mediaQueries } from "utils/constants/mediaQueries";
 import { ExtraTitle } from "../Typography/Typography";
 
 const ContainerWrapper = styled.div`
@@ -25,6 +26,10 @@ const Main = styled.div`
 	display: flex;
 	width: 100%;
 	max-width: 520px;
+
+	${mediaQueries.breakpoint[0]} {
+		margin: 0 15px;
+	}
 `;
 
 export const AuthLayout: React.FC = ({ children }) => {
