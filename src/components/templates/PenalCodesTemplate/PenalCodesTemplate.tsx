@@ -6,7 +6,7 @@ import { Modal } from "components/layouts/Modal/Modal";
 import { PenalCodesFilters } from "components/layouts/PenalCodesFilters/PenalCodesFilters";
 import { PenalCodesList } from "components/layouts/PenalCodesList/PenalCodesList";
 import { PenalCodesTableFilters } from "enums/PenalCodesTableFilters";
-import { createRef, useRef } from "react";
+import { createRef } from "react";
 import { useDispatch } from "react-redux";
 import { setPenalCodesFilter } from "store/actions/penalCodesFilter.action";
 import { mediaQueries } from "utils/constants/mediaQueries";
