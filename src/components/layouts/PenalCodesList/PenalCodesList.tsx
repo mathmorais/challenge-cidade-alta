@@ -8,6 +8,8 @@ import { IPenalCode } from "interfaces/IPenalCode";
 import { PenalCodesTableFilters } from "enums/PenalCodesTableFilters";
 import { useEffect } from "react";
 import { clearPenalCodesFilter } from "store/actions/penalCodesFilter.action";
+import { Paragraphy } from "../Typography/Typography";
+import { TableListNotFound } from "../TableListNotFound/TableListNotFound";
 
 export const PenalCodesList = () => {
 	const { columns, dropdownItems } = usePenalCodesList();
@@ -39,20 +41,30 @@ export const PenalCodesList = () => {
 
 	return (
 		<Table columns={columns}>
-			{filteredPenalCodes.map((penalCode) => (
-				<TableRow key={penalCode.id}>
-					<TableCell bold>{penalCode.nome}</TableCell>
-					<TableCell>{dateFormatter(penalCode.dataCriacao)}</TableCell>
-					<TableCell>R${Math.floor(penalCode.multa)}</TableCell>
-					<TableCell>{penalCode.tempoPrisao} meses</TableCell>
+			{filteredPenalCodes.length > 0 ? (
+				filteredPenalCodes.map((penalCode) => (
+					<TableRow key={penalCode.id}>
+						<TableCell width="200px" bold>
+							{penalCode.nome}
+						</TableCell>
+						<TableCell>{dateFormatter(penalCode.dataCriacao)}</TableCell>
+						<TableCell>R${Math.floor(penalCode.multa)}</TableCell>
+						<TableCell>{penalCode.tempoPrisao} meses</TableCell>
+						<TableCell>
+							<Status status={penalCode.status} />
+						</TableCell>
+						<TableCell>
+							<Dropdown items={dropdownItems} />
+						</TableCell>
+					</TableRow>
+				))
+			) : (
+				<TableRow>
 					<TableCell>
-						<Status status={penalCode.status} />
-					</TableCell>
-					<TableCell>
-						<Dropdown items={dropdownItems} />
+						<TableListNotFound />
 					</TableCell>
 				</TableRow>
-			))}
+			)}
 		</Table>
 	);
 };

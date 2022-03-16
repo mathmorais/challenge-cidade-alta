@@ -9,6 +9,7 @@ import { MoreIcon } from "utils/constants/icons";
 
 const Wrapper = styled.div`
 	position: relative;
+	z-index: 2;
 `;
 
 const Content = styled.div`
@@ -31,6 +32,7 @@ const Item = styled(ButtonHelper)<{ enabled: boolean }>`
 	justify-content: start;
 	gap: 16px;
 	padding: 17px;
+
 	&:hover {
 		background: ${(props) => props.theme.neutral[100]};
 	}

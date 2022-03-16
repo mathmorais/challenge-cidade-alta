@@ -2,6 +2,21 @@ import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { typography } from "utils/constants/typography";
 
+type CellAlign =
+	| "start"
+	| "end"
+	| "left"
+	| "right"
+	| "center"
+	| "justify"
+	| "match-parent";
+
+type CellStylesProps = {
+	align?: CellAlign;
+	bold?: boolean;
+	width?: string;
+};
+
 const Container = styled.table`
 	width: 100%;
 	border-spacing: 0;
@@ -20,25 +35,12 @@ const TableData = css`
 
 export const TableRow = styled.tr``;
 
-type CellAlign =
-	| "start"
-	| "end"
-	| "left"
-	| "right"
-	| "center"
-	| "justify"
-	| "match-parent";
-
-type CellStylesProps = {
-	align?: CellAlign;
-	bold?: boolean;
-};
-
 export const TableCell = styled.td<CellStylesProps>`
+	position: relative;
 	${TableData}
 	text-align: ${(props) => props.align ?? "left"};
 	font-weight: ${(props) => props.bold && "bold"};
-	white-space: pre-line;
+	width: ${(props) => props.width};
 `;
 
 interface ITableColumn extends CellStylesProps {

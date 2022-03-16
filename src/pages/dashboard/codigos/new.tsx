@@ -1,4 +1,3 @@
-import { Button } from "components/buttons/Button/Button";
 import { LayoutNextPage } from "next";
 import { DashboardLayout } from "components/layouts/DashboardLayout/DashboardLayout";
 import { ModifyTypes } from "components/layouts/PenalCodesModify/PenalCodesModify";
