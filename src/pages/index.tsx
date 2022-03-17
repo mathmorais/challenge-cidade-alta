@@ -7,6 +7,7 @@ import { Button } from "components/buttons/Button/Button";
 import { Paragraphy } from "components/layouts/Typography/Typography";
 import { Anchor } from "components/buttons/Anchor/Anchor";
 import { useRouter } from "next/router";
+import { StatusContextProvider } from "contexts/statusContext";
 
 const LoginPage: LayoutNextPage = () => {
 	const router = useRouter();

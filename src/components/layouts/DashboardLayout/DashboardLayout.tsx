@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { ButtonFilled } from "components/buttons/Button/variations/Button.filled";
+import { StatusContextProvider } from "contexts/statusContext";
 import { IUser } from "interfaces/IUser";
 import { useRouter } from "next/router";
 import { ChevronLeftIcon } from "utils/constants/icons";
@@ -68,24 +69,26 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
 	};
 
 	return (
-		<Container>
-			<Sidebar />
-			<Main>
-				<Header>
-					<Profile user={mockedUser} />
-				</Header>
-				<Content>
-					<ContentTitleWrapper>
-						{redirectTo && (
-							<ButtonFilled onClick={() => push(redirectTo)} rounded>
-								<ChevronLeftIcon />
-							</ButtonFilled>
-						)}
-						<Title>{contentTitle}</Title>
-					</ContentTitleWrapper>
-					<Frame>{children}</Frame>
-				</Content>
-			</Main>
-		</Container>
+		<StatusContextProvider>
+			<Container>
+				<Sidebar />
+				<Main>
+					<Header>
+						<Profile user={mockedUser} />
+					</Header>
+					<Content>
+						<ContentTitleWrapper>
+							{redirectTo && (
+								<ButtonFilled onClick={() => push(redirectTo)} rounded>
+									<ChevronLeftIcon />
+								</ButtonFilled>
+							)}
+							<Title>{contentTitle}</Title>
+						</ContentTitleWrapper>
+						<Frame>{children}</Frame>
+					</Content>
+				</Main>
+			</Container>
+		</StatusContextProvider>
 	);
 };

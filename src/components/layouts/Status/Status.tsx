@@ -1,5 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import { StatusContext } from "contexts/statusContext";
+import { useContext } from "react";
 import { Paragraphy } from "../Typography/Typography";
 
 const Container = styled.div<{ inactive?: boolean }>`
@@ -17,18 +19,14 @@ const Container = styled.div<{ inactive?: boolean }>`
 `;
 
 export const Status: React.FC<{ status: number }> = ({ status }) => {
-	const handleGetStatusText = () => {
-		const statusTexts: { [key: number]: string } = {
-			1: "Inativo",
-			2: "Ativo",
-		};
-
-		return statusTexts[status] ?? "Desconhecido";
-	};
+	const context = useContext(StatusContext);
+	const currentStatus = context.status
+		? context.status[status]
+		: "Desconhecido";
 
 	return (
-		<Container inactive={status === 1}>
-			<Paragraphy>{handleGetStatusText()}</Paragraphy>
+		<Container inactive={currentStatus !== "Ativo"}>
+			<Paragraphy>{currentStatus}</Paragraphy>
 		</Container>
 	);
 };
