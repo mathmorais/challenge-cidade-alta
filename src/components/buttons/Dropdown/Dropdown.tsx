@@ -12,7 +12,7 @@ const Wrapper = styled.div`
 	z-index: 2;
 `;
 
-const Content = styled.div`
+const Content = styled.ul`
 	display: flex;
 	position: absolute;
 	right: 0px;

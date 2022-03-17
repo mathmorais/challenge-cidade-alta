@@ -3,12 +3,9 @@ import styled from "@emotion/styled";
 import { Span } from "components/layouts/Typography/Typography";
 import { forwardRef, TextareaHTMLAttributes } from "react";
 import { typography } from "utils/constants/typography";
-import { Field } from "../Input/Input";
+import { InputHelper } from "../Input/Input.helper";
 
-const Container = styled.div`
-	display: flex;
-	width: 100%;
-	position: relative;
+const Container = styled(InputHelper)`
 	height: 170px;
 	overflow: hidden;
 `;

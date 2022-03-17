@@ -1,9 +1,13 @@
 import styled from "@emotion/styled";
 import { Button } from "components/buttons/Button/Button";
+import { Select } from "components/buttons/Select/Select";
 import { Form } from "components/forms/Form/Form";
 import { Input } from "components/forms/Input/Input";
 import { TextArea } from "components/forms/TextArea/TextArea";
+import { StatusContext } from "contexts/statusContext";
 import { IPenalCode } from "interfaces/IPenalCode";
+import { IStatus } from "interfaces/IStatus";
+import { useContext } from "react";
 import { Card } from "../Card/Card";
 
 export enum ModifyTypes {
@@ -19,6 +23,8 @@ export const PenalCodesModify: React.FC<{
 	type: ModifyTypes;
 	initialValue?: IPenalCode;
 }> = ({ type, initialValue }) => {
+	const { status } = useContext(StatusContext);
+
 	const handleOnSubmit = () => {
 		if (type === ModifyTypes.add) {
 			console.log("Add action");
@@ -54,11 +60,12 @@ export const PenalCodesModify: React.FC<{
 					placeholder="Valor da multa"
 					type="number"
 				/>
-				<Input
+
+				<Select
 					value={initialValue?.status}
+					placeholder="Selecione um status"
 					label="Status"
-					placeholder="Status inicial do codigo"
-					type={"number"}
+					items={{ ...status }}
 				/>
 				<ButtonWrapper>
 					<Button>
