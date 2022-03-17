@@ -2,7 +2,7 @@ import axios from "axios";
 import { DashboardLayout } from "components/layouts/DashboardLayout/DashboardLayout";
 import { PenalCodesTemplate } from "components/templates/PenalCodesTemplate/PenalCodesTemplate";
 import { IPenalCode } from "interfaces/IPenalCode";
-import { GetServerSideProps, LayoutNextPage } from "next";
+import { GetServerSideProps, GetStaticProps, LayoutNextPage } from "next";
 import { useDispatch } from "react-redux";
 import { setPenalCodesAction } from "store/actions/penalCodes.action";
 
@@ -26,9 +26,7 @@ PenalCodesPage.getLayout = (page) => {
 
 export default PenalCodesPage;
 
-export const getServerSideProps: GetServerSideProps<
-	ServerSideDTO
-> = async () => {
+export const getStaticProps: GetStaticProps<ServerSideDTO> = async () => {
 	const url = process.env.API_URL;
 	let data: IPenalCode[] = [];
 
@@ -41,5 +39,7 @@ export const getServerSideProps: GetServerSideProps<
 		props: {
 			penalCodes: data,
 		},
+
+		revalidate: 60 * 10, // 10 minutes
 	};
 };

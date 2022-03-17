@@ -20,9 +20,7 @@ const Container = styled.div<{ inactive?: boolean }>`
 
 export const Status: React.FC<{ status: number }> = ({ status }) => {
 	const context = useContext(StatusContext);
-	const currentStatus = context.status
-		? context.status[status]
-		: "Desconhecido";
+	const currentStatus = context.status ? context.status[status] : "...";
 
 	return (
 		<Container inactive={currentStatus !== "Ativo"}>
