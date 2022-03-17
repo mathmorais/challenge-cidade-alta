@@ -1,6 +1,8 @@
 import AddIcon from "@public/svgs/add.svg";
 import ChevronRightIcon from "@public/svgs/chevron-right.svg";
 import ChevronLeftIcon from "@public/svgs/chevron-left.svg";
+import ChevronUpIcon from "@public/svgs/chevron-up.svg";
+import ChevronDownIcon from "@public/svgs/chevron-down.svg";
 import GavelIcon from "@public/svgs/gavel.svg";
 import LogoutIcon from "@public/svgs/logout.svg";
 import PoliceIcon from "@public/svgs/police.svg";
@@ -11,6 +13,8 @@ import VisibilityIcon from "@public/svgs/visibility.svg";
 
 export {
 	AddIcon,
+	ChevronUpIcon,
+	ChevronDownIcon,
 	ChevronRightIcon,
 	ChevronLeftIcon,
 	GavelIcon,
