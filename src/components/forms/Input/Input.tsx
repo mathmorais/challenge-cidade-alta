@@ -3,14 +3,7 @@ import styled from "@emotion/styled";
 import { typography } from "../../../utils/constants/typography";
 import { Span } from "../../layouts/Typography/Typography";
 import { css } from "@emotion/react";
-
-export const Wrapper = styled.div`
-	display: flex;
-	width: 100%;
-	height: 56px;
-	position: relative;
-`;
-
+import { InputHelper } from "./Input.helper";
 const DisabledInput = css`
 	pointer-events: none;
 `;
@@ -73,7 +66,7 @@ type InputProps = {
 export const Input = forwardRef<HTMLInputElement, InputProps>(
 	({ label, readOnly, icon, ...props }, ref) => {
 		return (
-			<Wrapper>
+			<InputHelper>
 				{icon && icon}
 				<Field
 					aria-disabled={readOnly}
@@ -86,7 +79,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 						<Span>{label}</Span>
 					</legend>
 				</Fieldset>
-			</Wrapper>
+			</InputHelper>
 		);
 	}
 );
