@@ -1,21 +1,18 @@
-import { IReducer } from "store/interfaces/IReducer";
+import { createReducer } from "@reduxjs/toolkit";
+import {
+	toogleModalAction,
+	toogleModalWithData,
+} from "store/actions/modal.action";
 
-export enum ModalActions {
-	toogle = "TOOGLE_MODAL",
-}
+type ModalState = { opened: boolean; data?: string | number };
 
-export type ModalValue = boolean;
+const initialState = { opened: false } as ModalState;
 
-const INITIAL_STATE: ModalValue = false;
-
-export const modalReducer: IReducer<ModalValue, ModalActions> = (
-	state = INITIAL_STATE,
-	action
-) => {
-	switch (action?.type) {
-		case ModalActions.toogle:
-			return (state = !state);
-		default:
-			return state;
-	}
-};
+export const modalReducer = createReducer(initialState, (builder) => {
+	builder.addCase(toogleModalAction, (state) => {
+		state.opened = !state.opened;
+	});
+	builder.addCase(toogleModalWithData, (state, action) => {
+		(state.opened = !state.opened), (state.data = action.payload);
+	});
+});

@@ -1,6 +1,7 @@
-import { IAction } from "store/interfaces/IAction";
-import { ModalActions } from "store/reducers/modal.reducer";
+import { createAction } from "@reduxjs/toolkit";
 
-export const toogleModalAction = (): IAction<ModalActions> => ({
-	type: ModalActions.toogle,
-});
+export const toogleModalAction = createAction("modal/toogle");
+
+export const toogleModalWithData = createAction<string | number>(
+	"modal/toogleWithData"
+);

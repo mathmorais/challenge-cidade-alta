@@ -2,9 +2,10 @@ import axios from "axios";
 import { DashboardLayout } from "components/layouts/DashboardLayout/DashboardLayout";
 import { PenalCodesTemplate } from "components/templates/PenalCodesTemplate/PenalCodesTemplate";
 import { IPenalCode } from "interfaces/IPenalCode";
-import { GetServerSideProps, GetStaticProps, LayoutNextPage } from "next";
+import { GetStaticProps, LayoutNextPage } from "next";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setPenalCodesAction } from "store/actions/penalCodes.action";
+import { setPenalCodes } from "store/actions/penalCodes.action";
 
 type ServerSideDTO = {
 	penalCodes: IPenalCode[];
@@ -13,7 +14,9 @@ type ServerSideDTO = {
 const PenalCodesPage: LayoutNextPage<ServerSideDTO> = ({ penalCodes }) => {
 	const dispatch = useDispatch();
 
-	dispatch(setPenalCodesAction(penalCodes));
+	useEffect(() => {
+		dispatch(setPenalCodes(penalCodes));
+	}, []);
 
 	return <PenalCodesTemplate />;
 };

@@ -3,30 +3,44 @@ import { dateFormatter } from "utils/helpers/dateFormatter";
 import { Status } from "../Status/Status";
 import { Dropdown } from "components/buttons/Dropdown/Dropdown";
 import { usePenalCodesList } from "hooks/usePenalCodesList";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { IPenalCode } from "interfaces/IPenalCode";
-import { PenalCodesTableFilters } from "enums/PenalCodesTableFilters";
-import { useEffect } from "react";
-import { clearPenalCodesFilter } from "store/actions/penalCodesFilter.action";
-import { Paragraphy } from "../Typography/Typography";
 import { TableListNotFound } from "../TableListNotFound/TableListNotFound";
+import { TableFilters } from "enums/PenalCodesTableFilters";
 
 export const PenalCodesList = () => {
 	const { columns, dropdownItems } = usePenalCodesList();
-	const dispatch = useDispatch();
-	const penalCodes = useSelector((store) => store.penalCodesReducer);
-	const penalCodesFilter = useSelector(
-		(store) => store.penalCodesFilterReducer
-	);
+	const { penalCodes } = useSelector((store) => store.penalCodes);
+	const { filter, value } = useSelector((store) => store.penalCodesFilter);
 
 	const handleFilters = (data: IPenalCode[]) => {
-		switch (penalCodesFilter.filter) {
-			case PenalCodesTableFilters.search:
+		switch (filter) {
+			case TableFilters.search:
 				return data.filter((item) => {
-					const searchFor = String(penalCodesFilter.value);
+					const searchFor = String(value);
 					const regex = new RegExp(searchFor, "i");
 
 					return regex.test(item.nome);
+				});
+			case TableFilters.date:
+				return data.filter((item) => {
+					console.log(item.dataCriacao);
+					const timeStamp = new Date(item.dataCriacao).getTime();
+					console.log("Table item " + timeStamp);
+					console.log("Date value " + value);
+
+					return timeStamp - Number(value || 0) >= 0;
+				});
+			case TableFilters.fine:
+				return data.filter((item) => {
+					if (typeof value === "object") {
+						const { min, max } = value;
+						const multa = Math.floor(item.multa);
+
+						if (min === 0 || max === 0) return item;
+
+						return multa >= min && multa <= max;
+					}
 				});
 			default:
 				return data;
@@ -34,10 +48,6 @@ export const PenalCodesList = () => {
 	};
 
 	const filteredPenalCodes = handleFilters(penalCodes);
-
-	useEffect(() => {
-		dispatch(clearPenalCodesFilter());
-	}, []);
 
 	return (
 		<Table columns={columns}>
@@ -48,13 +58,13 @@ export const PenalCodesList = () => {
 							{penalCode.nome}
 						</TableCell>
 						<TableCell>{dateFormatter(penalCode.dataCriacao)}</TableCell>
-						<TableCell>R${Math.floor(penalCode.multa)}</TableCell>
+						<TableCell>R${penalCode.multa}</TableCell>
 						<TableCell>{penalCode.tempoPrisao} meses</TableCell>
 						<TableCell>
 							<Status status={penalCode.status} />
 						</TableCell>
 						<TableCell>
-							<Dropdown items={dropdownItems} />
+							<Dropdown items={dropdownItems(penalCode.id)} />
 						</TableCell>
 					</TableRow>
 				))

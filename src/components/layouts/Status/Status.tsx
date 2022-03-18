@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { StatusContext } from "contexts/statusContext";
+import { useStatus } from "hooks/useStatus";
 import { useContext } from "react";
 import { Paragraphy } from "../Typography/Typography";
 
@@ -19,8 +20,7 @@ const Container = styled.div<{ inactive?: boolean }>`
 `;
 
 export const Status: React.FC<{ status: number }> = ({ status }) => {
-	const context = useContext(StatusContext);
-	const currentStatus = context.status ? context.status[status] : "...";
+	const currentStatus = useStatus(status);
 
 	return (
 		<Container inactive={currentStatus !== "Ativo"}>

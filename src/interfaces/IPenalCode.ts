@@ -1,5 +1,5 @@
 export interface IPenalCode {
-	id: number;
+	id: string | number;
 	dataCriacao: string;
 	descricao: string;
 	multa: number;
