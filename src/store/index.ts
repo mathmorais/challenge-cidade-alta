@@ -1,25 +1,17 @@
-import { combineReducers, createStore } from "@reduxjs/toolkit";
-import { IReducer } from "./interfaces/IReducer";
-import { modalReducer, ModalValue } from "./reducers/modal.reducer";
-import {
-	penalCodesReducer,
-	PenalCodesValue,
-} from "./reducers/penalCodes.reducer";
-import {
-	penalCodesFilterReducer,
-	PenalCodesFilterValue,
-} from "./reducers/penalCodesFilter.reducer";
+import { configureStore } from "@reduxjs/toolkit";
+import { modalReducer } from "./reducers/modal.reducer";
+import { penalCodesReducer } from "./reducers/penalCodes.reducer";
+import { penalCodesFilterReducer } from "./reducers/penalCodesFilter.reducer";
 
-export interface RootState {
-	modalReducer: ModalValue;
-	penalCodesReducer: PenalCodesValue;
-	penalCodesFilterReducer: PenalCodesFilterValue;
-}
+const reducers = {
+	penalCodes: penalCodesReducer,
+	penalCodesFilter: penalCodesFilterReducer,
+	modal: modalReducer,
+};
 
-export const combinedReducers = combineReducers({
-	modalReducer,
-	penalCodesReducer,
-	penalCodesFilterReducer,
-} as { [key in keyof RootState]: IReducer<any, any> });
+export const store = configureStore({
+	reducer: reducers,
+	devTools: process.env.NODE_ENV !== "production",
+});
 
-export const store = createStore(combinedReducers);
+export type RootState = ReturnType<typeof store.getState>;

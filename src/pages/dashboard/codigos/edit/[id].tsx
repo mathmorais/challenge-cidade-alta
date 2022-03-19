@@ -2,9 +2,17 @@ import { DashboardLayout } from "components/layouts/DashboardLayout/DashboardLay
 import { ModifyTypes } from "components/layouts/PenalCodesModify/PenalCodesModify";
 import { ModifyPenalCodesTemplate } from "components/templates/ModifyPenalCodesTemplate/ModifyPenalCodesTemplate";
 import { LayoutNextPage } from "next";
+import { useRouter } from "next/router";
 
 const EditRegisterPage: LayoutNextPage = () => {
-	return <ModifyPenalCodesTemplate modifyType={ModifyTypes.edit} />;
+	const { query } = useRouter();
+
+	return (
+		<ModifyPenalCodesTemplate
+			penalCodeId={String(query.id)}
+			modifyType={ModifyTypes.edit}
+		/>
+	);
 };
 
 EditRegisterPage.getLayout = (page) => {

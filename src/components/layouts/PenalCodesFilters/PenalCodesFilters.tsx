@@ -3,7 +3,18 @@ import { Button, ButtonDefault } from "components/buttons/Button/Button";
 
 import { Form } from "components/forms/Form/Form";
 import { Input } from "components/forms/Input/Input";
+import { TableFilters } from "enums/PenalCodesTableFilters";
 import { useRouter } from "next/router";
+import {
+	ChangeEvent,
+	ChangeEventHandler,
+	createRef,
+	InputHTMLAttributes,
+	RefObject,
+	useEffect,
+} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPenalCodesFilter } from "store/actions/penalCodesFilter.action";
 import { ChevronRightIcon } from "utils/constants/icons";
 import { mediaQueries } from "utils/constants/mediaQueries";
 import { Card } from "../Card/Card";
@@ -42,6 +53,48 @@ const InputWrapper = styled.div`
 
 export const PenalCodesFilters = () => {
 	const { push } = useRouter();
+	const dateFieldRef = createRef<HTMLInputElement>();
+	const minFieldRef = createRef<HTMLInputElement>();
+	const maxFieldRef = createRef<HTMLInputElement>();
+	const dispatch = useDispatch();
+
+	const clearInputRef = (ref: RefObject<HTMLInputElement>) => {
+		if (ref.current && ref.current.value !== "") {
+			ref.current.value = "";
+		}
+	};
+
+	const handleDateChange = (event: ChangeEvent<HTMLInputElement>) => {
+		clearInputRef(minFieldRef);
+		clearInputRef(maxFieldRef);
+
+		dispatch(
+			setPenalCodesFilter({
+				filter: TableFilters.date,
+				value: event.currentTarget.valueAsNumber,
+			})
+		);
+	};
+
+	const handleValueFilterSubmit = () => {
+		clearInputRef(dateFieldRef);
+
+		dispatch(
+			setPenalCodesFilter({
+				filter: TableFilters.fine,
+				value: {
+					max: Number(maxFieldRef.current?.value),
+					min: Number(minFieldRef.current?.value),
+				},
+			})
+		);
+	};
+
+	useEffect(() => {
+		clearInputRef(dateFieldRef);
+		clearInputRef(maxFieldRef);
+		clearInputRef(minFieldRef);
+	}, []);
 
 	return (
 		<Wrapper>
@@ -50,12 +103,29 @@ export const PenalCodesFilters = () => {
 			</Button>
 			<Container>
 				<Card>
-					<Form>
-						<Input type="date" label="Data" />
+					<Form onSubmit={handleValueFilterSubmit}>
+						<Input
+							ref={dateFieldRef}
+							onChange={handleDateChange}
+							type="date"
+							label="Data"
+						/>
 						<InputWrapper>
-							<Input placeholder="R$ Minimo" label="Minimo" />
-							<Input placeholder="R$ Maximo" label="Maximo" />
-							<Button rounded variation="filled">
+							<Input
+								ref={minFieldRef}
+								min={0}
+								type="number"
+								placeholder="R$ Minimo"
+								label="Minimo"
+							/>
+							<Input
+								ref={maxFieldRef}
+								min={minFieldRef.current?.value}
+								type="number"
+								placeholder="R$ Maximo"
+								label="Maximo"
+							/>
+							<Button type="submit" rounded variation="filled">
 								<ChevronRightIcon />
 							</Button>
 						</InputWrapper>

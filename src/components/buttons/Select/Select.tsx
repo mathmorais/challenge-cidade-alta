@@ -102,7 +102,11 @@ export const Select: React.FC<SelectProps> = ({
 
 	const handleSerializeMenuItems = () => {
 		return Object.keys(items).map((item, index) => (
-			<SelectMenuItem key={index} onMouseDown={() => setValue(item)}>
+			<SelectMenuItem
+				type="button"
+				key={index}
+				onMouseDown={() => setValue(item)}
+			>
 				<Span>{items[item]}</Span>
 			</SelectMenuItem>
 		));
@@ -111,6 +115,7 @@ export const Select: React.FC<SelectProps> = ({
 	return (
 		<SelectWrapper onBlur={() => setActive(false)}>
 			<SelectBox
+				type="button"
 				onClick={() => {
 					setActive(!active);
 				}}

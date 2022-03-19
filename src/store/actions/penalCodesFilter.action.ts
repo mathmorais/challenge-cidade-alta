@@ -1,16 +1,15 @@
-import { IAction } from "store/interfaces/IAction";
-import {
-	PenalCodesFilterActions,
-	PenalCodesFilterValue,
-} from "store/reducers/penalCodesFilter.reducer";
+import { createAction } from "@reduxjs/toolkit";
+import { TableFilters } from "enums/PenalCodesTableFilters";
 
-export const setPenalCodesFilter = (
-	payload: PenalCodesFilterValue
-): IAction<PenalCodesFilterActions> => ({
-	type: PenalCodesFilterActions.set,
-	payload: payload,
-});
+export const setPenalCodesFilter = createAction<{
+	filter: TableFilters;
+	value?:
+		| string
+		| number
+		| {
+				min: number;
+				max: number;
+		  };
+}>("penalCodesFilter/set");
 
-export const clearPenalCodesFilter = () => ({
-	type: PenalCodesFilterActions.clear,
-});
+export const clearPenalCodesFilter = createAction("penalCodesFilter/clear");

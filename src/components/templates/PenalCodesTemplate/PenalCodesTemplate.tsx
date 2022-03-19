@@ -5,9 +5,10 @@ import { Card } from "components/layouts/Card/Card";
 import { Modal } from "components/layouts/Modal/Modal";
 import { PenalCodesFilters } from "components/layouts/PenalCodesFilters/PenalCodesFilters";
 import { PenalCodesList } from "components/layouts/PenalCodesList/PenalCodesList";
-import { PenalCodesTableFilters } from "enums/PenalCodesTableFilters";
+import { TableFilters } from "enums/PenalCodesTableFilters";
 import { createRef } from "react";
 import { useDispatch } from "react-redux";
+import { removePenalCode } from "store/actions/penalCodes.action";
 import { setPenalCodesFilter } from "store/actions/penalCodesFilter.action";
 import { mediaQueries } from "utils/constants/mediaQueries";
 
@@ -37,10 +38,16 @@ export const PenalCodesTemplate: React.FC = () => {
 	const handleInputSearch = () => {
 		dispatch(
 			setPenalCodesFilter({
-				filter: PenalCodesTableFilters.search,
+				filter: TableFilters.search,
 				value: searchFieldRef.current?.value,
 			})
 		);
+	};
+
+	const handleDeleteRegistry = (data?: string | number) => {
+		if (data) {
+			dispatch(removePenalCode(data));
+		}
 	};
 
 	return (
@@ -61,7 +68,7 @@ export const PenalCodesTemplate: React.FC = () => {
 				</Card>
 				<Modal
 					label="Tem certeza que deseja excluir?"
-					onConfirmation={() => console.log("Handle modal confirmation")}
+					onConfirmation={handleDeleteRegistry}
 				/>
 			</Container>
 		</Wrapper>

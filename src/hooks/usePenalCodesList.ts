@@ -1,7 +1,8 @@
 import { DropdownItem } from "components/buttons/Dropdown/Dropdown";
+import { IPenalCode } from "interfaces/IPenalCode";
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
-import { toogleModalAction } from "store/actions/modal.action";
+import { toogleModalWithData } from "store/actions/modal.action";
 import { DeleteIcon, EditIcon, VisibilityIcon } from "utils/constants/icons";
 
 export const usePenalCodesList = () => {
@@ -16,19 +17,19 @@ export const usePenalCodesList = () => {
 		{ field: "status", headerName: "Status" },
 	];
 
-	const dropdownItems: DropdownItem[] = [
+	const dropdownItems = (penalCodeId: IPenalCode["id"]): DropdownItem[] => [
 		{
-			action: () => push("/dashboard/codigos/1"),
+			action: () => push("/dashboard/codigos/" + penalCodeId),
 			label: "Ver",
 			icon: VisibilityIcon,
 		},
 		{
-			action: () => push("/dashboard/codigos/edit/1"),
+			action: () => push("/dashboard/codigos/edit/" + penalCodeId),
 			label: "Editar",
 			icon: EditIcon,
 		},
 		{
-			action: () => dispatch(toogleModalAction()),
+			action: () => dispatch(toogleModalWithData(penalCodeId)),
 			label: "Excluir",
 			icon: DeleteIcon,
 		},

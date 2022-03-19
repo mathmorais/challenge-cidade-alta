@@ -1,9 +1,12 @@
 import { DashboardLayout } from "components/layouts/DashboardLayout/DashboardLayout";
 import { VisualizePenalCodeTemplate } from "components/templates/VisualizePenalCodeTemplate/VisualizePenalCodeTemplate";
 import { LayoutNextPage } from "next";
+import { useRouter } from "next/router";
 
 const VisualizeRegisterPage: LayoutNextPage = () => {
-	return <VisualizePenalCodeTemplate />;
+	const { query } = useRouter();
+
+	return <VisualizePenalCodeTemplate id={String(query.id)} />;
 };
 
 VisualizeRegisterPage.getLayout = (page) => {

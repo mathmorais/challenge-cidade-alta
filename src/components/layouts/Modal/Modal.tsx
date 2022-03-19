@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { ButtonFilled } from "components/buttons/Button/variations/Button.filled";
 import { ButtonTransparent } from "components/buttons/Button/variations/Button.transparent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { toogleModalAction } from "store/actions/modal.action";
 import { animations } from "utils/constants/animations";
@@ -39,20 +39,20 @@ const ButtonRow = styled.section`
 `;
 
 type ModalProps = {
-	onConfirmation: () => void;
+	onConfirmation: (data?: string | number) => void;
 	label: string;
 };
 
 export const Modal: React.FC<ModalProps> = ({ label, onConfirmation }) => {
 	const dispatch = useDispatch();
-	const isActive = useSelector((store) => store.modalReducer);
+	const { opened, data } = useSelector((store) => store.modal);
 
 	const handleOnConfirmation = () => {
-		onConfirmation();
+		onConfirmation(data);
 		dispatch(toogleModalAction());
 	};
 
-	return isActive ? (
+	return opened ? (
 		<Wrapper>
 			<Content>
 				<Card>

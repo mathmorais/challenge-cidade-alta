@@ -68,20 +68,19 @@ type TextAreaProps = {
 } & TextareaHTMLAttributes<HTMLTextAreaElement> &
 	TextAreaStyleProps;
 
-export const TextArea: React.FC<TextAreaProps> = forwardRef<
-	HTMLTextAreaElement,
-	TextAreaProps
->(({ label, ...props }, ref) => {
-	return (
-		<Container>
-			<TextAreaField ref={ref} {...props} />
-			<Fieldset>
-				<legend>
-					<Span>{label}</Span>
-				</legend>
-			</Fieldset>
-		</Container>
-	);
-});
+export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
+	({ label, ...props }, ref) => {
+		return (
+			<Container>
+				<TextAreaField ref={ref} {...props} />
+				<Fieldset>
+					<legend>
+						<Span>{label}</Span>
+					</legend>
+				</Fieldset>
+			</Container>
+		);
+	}
+);
 
 TextArea.displayName = "TextArea";
