@@ -7,9 +7,13 @@ import { IPenalCode } from "interfaces/IPenalCode";
 
 export const ModifyPenalCodesTemplate: React.FC<{
 	modifyType: ModifyTypes;
-	penalCodeId: IPenalCode["id"];
+	penalCodeId?: IPenalCode["id"];
 }> = ({ modifyType, penalCodeId }) => {
-	const penalCode = useGetPenalCode(penalCodeId);
+	const penalCode = useGetPenalCode(penalCodeId ?? 0);
 
-	return <PenalCodesModify type={modifyType} initialValue={penalCode} />;
+	return penalCode ? (
+		<PenalCodesModify type={modifyType} initialValue={penalCode} />
+	) : (
+		<PenalCodesModify type={modifyType} />
+	);
 };
