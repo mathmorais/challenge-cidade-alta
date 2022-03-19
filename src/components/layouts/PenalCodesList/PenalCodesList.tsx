@@ -35,11 +35,11 @@ export const PenalCodesList = () => {
 				return data.filter((item) => {
 					if (typeof value === "object") {
 						const { min, max } = value;
-						const multa = Math.floor(item.multa);
+						const multa = item.multa;
 
-						if (min === 0 || max === 0) return item;
+						if (min >= 0 && max === 0) return item;
 
-						return multa >= min && multa <= max;
+						return multa >= min && max - multa >= 0;
 					}
 				});
 			default:
