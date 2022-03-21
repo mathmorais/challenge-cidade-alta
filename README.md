@@ -10,6 +10,14 @@ Projeto consiste em um simples dashboard para controlar os códigos penais de de
 
 [Deploy](https://challenge-cidade-alta.vercel.app)
 
+### Features
+- Botão para adicionar um novo registro
+- Botão para visualizar todas as informações de um registro
+- Botão para remover um registro
+- Botão para editar um registro já existente
+- Sistema de filtragem de registros por data e valor
+- Campo para pesquisa de um registro específico
+
 ### ⚡ Como iniciar
 
 Instale as dependencias com o seu gerenciador de pacotes
